@@ -1,11 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { Component } from 'react';
 import {SafeAreaView,View, StyleSheet, Text} from 'react-native';
 import Animation from '../../Assets/Animations/lf30_editor_qy1svwml.json';
 import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-
+import { Input, Button } from 'react-native-elements';
 
 const styles = StyleSheet.create({
     SafeAreaViewStyle: {
@@ -13,19 +13,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#309773',
         justifyContent: 'flex-end',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     brandTitle: {
         marginTop: 25,
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     LottieStyles: {
         flex: 1,
         paddingLeft: 55,
         backgroundColor: '#309773',
         marginTop: -30,
-        zIndex: -9
+        zIndex: -9,
     },
     ViewStyles: {
        backgroundColor: 'white',
@@ -34,38 +34,47 @@ const styles = StyleSheet.create({
        borderTopRightRadius: 55,
        borderTopLeftRadius: 55,
        position: 'absolute',
+       shadowColor: '#000',
+       shadowOffset: { width: 0, height: 2},
+       shadowOpacity: 0.8,
+       shadowRadius: 2,
+       elevation: 1,
     },
     LoginFormStyle: {
         textAlign: 'center',
-        alignItems: "center",
+        alignItems: 'center',
     },
     LoginFormText: {
         fontSize: 30,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
     },
     EmailInputForm: {
-        marginTop: 20
+        marginTop: 20,
     },
     PasswordInputForm: {
-        marginTop: 5
-    }
+        marginTop: 5,
+    },
 });
 
-export default function App() {
-    return( 
+export default function LoginPage({ navigation }) {
+    function navigateToHomePage() {
+        navigation.navigate('Home');
+    }
+
+    return (
         <>
             <SafeAreaView style={styles.SafeAreaViewStyle}>
                 <Text style={styles.brandTitle}>BrandTitle</Text>
                 <View style={styles.LottieStyles}>
-                    <Lottie 
-                        source={Animation} 
-                        autoPlay 
-                        loop 
-                        autoSize 
+                    <Lottie
+                        source={Animation}
+                        autoPlay
+                        loop
+                        autoSize
                         style={{
                             height: 300,
-                            width: 300
+                            width: 300,
                         }}
                     />
                 </View>
@@ -73,35 +82,60 @@ export default function App() {
                     <View style={styles.LoginFormStyle}>
                         <Text style={styles.LoginFormText}>Login</Text>
                         <Input
-                            placeholder='Email'
+                            placeholder="Email"
                             style={styles.EmailInputForm}
                             inputContainerStyle={{width: '75%', marginLeft: '15%'}}
                             leftIconContainerStyle={{ marginBottom: -15}}
                             leftIcon={
                                 <Icon
-                                  name='envelope'
-                                  size={24}
-                                  color='black'
+                                name="envelope"
+                                size={24}
+                                color="black"
                                 />
-                              }
+                            }
                         />
                         <Input
-                            placeholder='Password'
+                            placeholder="Password"
                             style={styles.PasswordInputForm}
                             inputContainerStyle={{width: '75%', marginLeft: '15%'}}
                             leftIconContainerStyle={{ marginBottom: 0, width: 20}}
                             secureTextEntry={true}
                             leftIcon={
                                 <Icon
-                                  name='lock'
-                                  size={24}
-                                  color='black'
+                                name="lock"
+                                size={24}
+                                color="black"
                                 />
-                              }
+                            }
                         />
                     </View>
+                    <Button
+                        title="Login"
+                        buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
+                        onPress={navigateToHomePage}
+                    />
+                    <Text
+                        style={{ fontWeight: 'bold', marginLeft: 50, marginTop: 30}}
+                    >
+                        If you forgout your password 
+                        <Text
+                            style={{color: 'red'}}
+                        > 
+                            Click here!
+                        </Text>
+                    </Text>
+                    <Text
+                        style={{ fontWeight: 'bold', marginLeft: 60, marginTop: 10}}
+                    >
+                        If you don't have account
+                        <Text
+                            style={{color: 'red'}}
+                        > 
+                            Click here!
+                        </Text>
+                    </Text>
                 </View>
             </SafeAreaView>
         </>
-    )
+    );
 }
