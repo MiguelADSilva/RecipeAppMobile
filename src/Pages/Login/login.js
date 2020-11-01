@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React, { Component } from 'react';
-import {SafeAreaView,View, StyleSheet, Text} from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, StyleSheet, Text, StatusBar } from 'react-native';
 import Animation from '../../Assets/Animations/lf30_editor_qy1svwml.json';
 import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -62,10 +62,15 @@ export default function LoginPage({ navigation }) {
         navigation.navigate('Home');
     }
 
+    function navigateToForgoutPassword() {
+        navigation.navigate('ForgoutPassword');
+    }
+
     return (
         <>
             <SafeAreaView style={styles.SafeAreaViewStyle}>
-                <Text style={styles.brandTitle}>BrandTitle</Text>
+                <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
+                <Text style={styles.brandTitle}>RecipeApp</Text>
                 <View style={styles.LottieStyles}>
                     <Lottie
                         source={Animation}
@@ -117,9 +122,10 @@ export default function LoginPage({ navigation }) {
                     <Text
                         style={{ fontWeight: 'bold', marginLeft: 50, marginTop: 30}}
                     >
-                        If you forgout your password 
+                        If you forgout your password <Text/>
                         <Text
                             style={{color: 'red'}}
+                            onPress={navigateToForgoutPassword}
                         > 
                             Click here!
                         </Text>
@@ -127,7 +133,7 @@ export default function LoginPage({ navigation }) {
                     <Text
                         style={{ fontWeight: 'bold', marginLeft: 60, marginTop: 10}}
                     >
-                        If you don't have account
+                        If you don't have account <Text />
                         <Text
                             style={{color: 'red'}}
                         > 
