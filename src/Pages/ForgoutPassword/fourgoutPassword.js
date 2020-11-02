@@ -1,27 +1,30 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StatusBar, SafeAreaView, StyleSheet, Alert } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Lottie from 'lottie-react-native';
 import Animation from '../../Assets/Animations/forgetPasswordAnimation.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const style = StyleSheet.create({
     Screen: {
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#309773',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignContent: 'space-between'
     },
     Title: {
-        marginLeft: '3%',
+        marginLeft: '5%',
         fontWeight: 'bold',
         fontSize: 25,
     },
     ForgoutPasswordForm: {
         backgroundColor: 'white',
-        width: '100%',
-        height: '30%',
+        width: wp('100%'),
+        height: hp('70%'),
         borderTopRightRadius: 55,
         borderTopLeftRadius: 55,
         position: 'absolute',
@@ -30,12 +33,18 @@ const style = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
-        marginTop: '150%'
+        marginTop: '130%'
      },
      ForgoutPasswordInput: {
          marginTop: 25
+     },
+     formLottieView: {
+         flexDirection: 'column',
+         alignItems: 'center',
+         marginBottom: 0
      }
 });
+
 
 export default function ForgoutPassword({ navigation }) {
 
@@ -43,14 +52,24 @@ export default function ForgoutPassword({ navigation }) {
         navigation.navigate('Login');
     };
 
+    const [form, setState] = useState({
+        email: ''
+    });
+
+    const updateEmailState = e => {
+        setState({
+            ...form,
+            email: e
+        });
+    };
+
     const showDialogBoxWithOneButton = () => {
         Alert.alert(
             "Email Sent",
-            "You will receive a Email for to restart your password",
+            `You will receive a Email for to restart your password ${form.email}`,
             [
                 {
                     text: "Close",
-                    onPress: () => console.log("Close Pressed!"),
                     style: "cancel"
                 },
             ],
@@ -70,31 +89,33 @@ export default function ForgoutPassword({ navigation }) {
                         />
                         <Text style={style.Title}>Forgout Password</Text>
                     </View>
-                    <View>
+                    <View style={style.formLottieView}>
                         <Lottie
                             source={Animation}
                             autoPlay
                             loop
                             autoSize
                             style={{
-                                height: 400,
-                                width: 400,
+                                height: hp('53.5%'),
+                                width: wp('53.5%'),
                                 marginLeft: 10,
-                                marginTop: 55
+                                marginTop: '15%'
                             }}
                         />
-                    </View>
-                    <View style={style.ForgoutPasswordForm}>
-                        <Input
-                            placeholder="Email"
-                            style={style.ForgoutPasswordInput}
-                            inputContainerStyle={{width: '75%', marginLeft: '15%'}}
-                        />
-                        <Button
-                            title="Send"
-                            buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
-                            onPress={showDialogBoxWithOneButton}
-                        />
+                        <View style={style.ForgoutPasswordForm}>
+                            <Input
+                                placeholder="Email"
+                                name="email"
+                                style={style.ForgoutPasswordInput}
+                                inputContainerStyle={{width: '75%', marginLeft: '15%'}}
+                                onChangeText={updateEmailState}
+                            />
+                            <Button
+                                title="Send"
+                                buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
+                                onPress={showDialogBoxWithOneButton}
+                            />
+                        </View>
                     </View>
             </SafeAreaView>
         </>

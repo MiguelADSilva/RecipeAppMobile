@@ -6,6 +6,7 @@ import Animation from '../../Assets/Animations/lf30_editor_qy1svwml.json';
 import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
     SafeAreaViewStyle: {
@@ -24,13 +25,13 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 55,
         backgroundColor: '#309773',
-        marginTop: -30,
+        marginTop: -15,
         zIndex: -9,
     },
     ViewStyles: {
        backgroundColor: 'white',
-       width: '100%',
-       height: '55%',
+       width: wp('100%'),
+       height: hp('55%'),
        borderTopRightRadius: 55,
        borderTopLeftRadius: 55,
        position: 'absolute',
@@ -55,6 +56,11 @@ const styles = StyleSheet.create({
     PasswordInputForm: {
         marginTop: 5,
     },
+    links: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginRight: 60
+    }
 });
 
 export default function LoginPage({ navigation }) {
@@ -78,8 +84,8 @@ export default function LoginPage({ navigation }) {
                         loop
                         autoSize
                         style={{
-                            height: 300,
-                            width: 300,
+                            height: hp('40.5%'),
+                            width: wp('40.5%'),
                         }}
                     />
                 </View>
@@ -119,27 +125,29 @@ export default function LoginPage({ navigation }) {
                         buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
                         onPress={navigateToHomePage}
                     />
-                    <Text
-                        style={{ fontWeight: 'bold', marginLeft: 50, marginTop: 30}}
-                    >
-                        If you forgout your password <Text/>
+                    <View style={styles.links}>
                         <Text
-                            style={{color: 'red'}}
-                            onPress={navigateToForgoutPassword}
-                        > 
-                            Click here!
+                            style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 30}}
+                        >
+                            If you forgout your password <Text/>
+                            <Text
+                                style={{color: 'red'}}
+                                onPress={navigateToForgoutPassword}
+                            > 
+                                Click here!
+                            </Text>
                         </Text>
-                    </Text>
-                    <Text
-                        style={{ fontWeight: 'bold', marginLeft: 60, marginTop: 10}}
-                    >
-                        If you don't have account <Text />
                         <Text
-                            style={{color: 'red'}}
-                        > 
-                            Click here!
+                            style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 10}}
+                        >
+                            If you don't have account <Text />
+                            <Text
+                                style={{color: 'red'}}
+                            > 
+                                Click here!
+                            </Text>
                         </Text>
-                    </Text>
+                    </View>
                 </View>
             </SafeAreaView>
         </>
