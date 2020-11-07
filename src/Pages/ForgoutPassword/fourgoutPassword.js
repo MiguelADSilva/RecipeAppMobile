@@ -11,14 +11,15 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#309773',
+        justifyContent: 'flex-end',
         flexDirection: 'column',
     },
     Title: {
-        marginLeft: '3%',
+        paddingLeft: '5%',
         fontWeight: 'bold',
         fontSize: 25,
     },
-    ForgoutPasswordForm: {
+    formViewStyles: {
         backgroundColor: 'white',
         width: '100%',
         height: '30%',
@@ -31,10 +32,19 @@ const style = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
         marginTop: '150%',
+    },
+    ForgoutPasswordForm: {
+        textAlign: 'center',
+        alignItems: 'center'
      },
      ForgoutPasswordInput: {
          marginTop: 25,
      },
+     LottieStyle: {
+         flex: 1,
+         marginTop: '60%',
+         zIndex: -9
+     }
 });
 
 export default function ForgoutPassword({ navigation }) {
@@ -50,7 +60,7 @@ export default function ForgoutPassword({ navigation }) {
             [
                 {
                     text: 'Close',
-                    onPress: () => console.log('Close Pressed!'),
+                    onPress: () => {},
                     style: 'cancel',
                 },
             ],
@@ -62,7 +72,7 @@ export default function ForgoutPassword({ navigation }) {
         <>
             <SafeAreaView style={style.Screen}>
                     <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
-                    <View style={{ flexDirection: 'row'}}>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start'}}>
                         <Button
                             title= "Back"
                             buttonStyle={{ width: 70, height: 30}}
@@ -70,7 +80,7 @@ export default function ForgoutPassword({ navigation }) {
                         />
                         <Text style={style.Title}>Forgout Password</Text>
                     </View>
-                    <View>
+                    <View style={style.LottieStyle}>
                         <Lottie
                             source={Animation}
                             autoPlay
@@ -79,22 +89,24 @@ export default function ForgoutPassword({ navigation }) {
                             style={{
                                 height: 400,
                                 width: 400,
-                                marginLeft: 10,
-                                marginTop: 55,
+                                marginLeft: 5,
+                                marginTop: -175,
                             }}
                         />
                     </View>
-                    <View style={style.ForgoutPasswordForm}>
-                        <Input
-                            placeholder="Email"
-                            style={style.ForgoutPasswordInput}
-                            inputContainerStyle={{width: '75%', marginLeft: '15%'}}
-                        />
-                        <Button
-                            title="Send"
-                            buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
-                            onPress={showDialogBoxWithOneButton}
-                        />
+                    <View style={style.formViewStyles}>
+                        <View style={style.ForgoutPasswordForm}>
+                            <Input
+                                placeholder="Email"
+                                style={style.ForgoutPasswordInput}
+                                inputContainerStyle={{width: '75%', marginLeft: '15%'}}
+                            />
+                            <Button
+                                title="Send"
+                                buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25}}
+                                onPress={showDialogBoxWithOneButton}
+                            />
+                        </View>
                     </View>
             </SafeAreaView>
         </>

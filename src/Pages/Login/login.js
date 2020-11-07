@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 55,
         backgroundColor: '#309773',
-        marginTop: -30,
+        marginTop: '2%',
         zIndex: -9,
     },
     ViewStyles: {
@@ -64,6 +64,10 @@ export default function LoginPage({ navigation }) {
 
     function navigateToForgoutPassword() {
         navigation.navigate('ForgoutPassword');
+    }
+
+    function navigationToSignUp() {
+        navigation.navigate('Signup');
     }
 
     return (
@@ -120,7 +124,7 @@ export default function LoginPage({ navigation }) {
                         onPress={navigateToHomePage}
                     />
                     <Text
-                        style={{ fontWeight: 'bold', marginLeft: 50, marginTop: 30}}
+                        style={{ fontWeight: 'bold', marginLeft: '17%', marginTop: 30}}
                     >
                         If you forgout your password <Text/>
                         <Text
@@ -131,11 +135,12 @@ export default function LoginPage({ navigation }) {
                         </Text>
                     </Text>
                     <Text
-                        style={{ fontWeight: 'bold', marginLeft: 60, marginTop: 10}}
+                        style={{ fontWeight: 'bold', marginLeft: '20%', marginTop: 10}}
                     >
                         If you don't have account <Text />
                         <Text
                             style={{color: 'red'}}
+                            onPress={navigationToSignUp}
                         > 
                             Click here!
                         </Text>
