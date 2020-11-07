@@ -18,10 +18,15 @@ const style = StyleSheet.create({
     },
     Title: {
         marginLeft: '5%',
+        justifyContent: 'flex-end',
+        flexDirection: 'column',
+    },
+    Title: {
+        paddingLeft: '5%',
         fontWeight: 'bold',
         fontSize: 25,
     },
-    ForgoutPasswordForm: {
+    formViewStyles: {
         backgroundColor: 'white',
         width: wp('100%'),
         height: hp('70%'),
@@ -33,7 +38,6 @@ const style = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
-        marginTop: '130%'
      },
      ForgoutPasswordInput: {
          marginTop: 25
@@ -42,6 +46,19 @@ const style = StyleSheet.create({
          flexDirection: 'column',
          alignItems: 'center',
          marginBottom: 0
+        marginTop: '150%',
+    },
+    ForgoutPasswordForm: {
+        textAlign: 'center',
+        alignItems: 'center'
+     },
+     ForgoutPasswordInput: {
+         marginTop: 25,
+     },
+     LottieStyle: {
+         flex: 1,
+         marginTop: '60%',
+         zIndex: -9
      }
 });
 
@@ -50,7 +67,7 @@ export default function ForgoutPassword({ navigation }) {
 
     function navigateToLoginPage() {
         navigation.navigate('Login');
-    };
+    }
 
     const [form, setState] = useState({
         email: ''
@@ -71,25 +88,33 @@ export default function ForgoutPassword({ navigation }) {
                 {
                     text: "Close",
                     style: "cancel"
+            'Email Sent',
+            'You will receive a Email for to restart your password',
+            [
+                {
+                    text: 'Close',
+                    onPress: () => {},
+                    style: 'cancel',
                 },
             ],
             { cancelable: false }
-        )
+        );
     };
 
     return (
         <>
             <SafeAreaView style={style.Screen}>
                     <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
-                    <View style={{ flexDirection: 'row'}}>
-                        <Button 
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'flex-start'}}>
+                        <Button
                             title= "Back"
-                            buttonStyle={{ width: 70, height: 30}} 
+                            buttonStyle={{ width: 70, height: 30}}
                             onPress={navigateToLoginPage}
                         />
                         <Text style={style.Title}>Forgout Password</Text>
                     </View>
                     <View style={style.formLottieView}>
+                    <View style={style.LottieStyle}>
                         <Lottie
                             source={Animation}
                             autoPlay
@@ -113,11 +138,28 @@ export default function ForgoutPassword({ navigation }) {
                             <Button
                                 title="Send"
                                 buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
+                                height: 400,
+                                width: 400,
+                                marginLeft: 5,
+                                marginTop: -175,
+                            }}
+                        />
+                    </View>
+                    <View style={style.formViewStyles}>
+                        <View style={style.ForgoutPasswordForm}>
+                            <Input
+                                placeholder="Email"
+                                style={style.ForgoutPasswordInput}
+                                inputContainerStyle={{width: '75%', marginLeft: '15%'}}
+                            />
+                            <Button
+                                title="Send"
+                                buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25}}
                                 onPress={showDialogBoxWithOneButton}
                             />
                         </View>
                     </View>
             </SafeAreaView>
         </>
-    )
-};
+    );
+}
