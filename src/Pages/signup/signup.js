@@ -157,7 +157,7 @@ export default function Signup({ navigation }) {
         <Button
           title="Send"
           buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25, alignSelf: 'center'}}
-          onPress={() => console.log(user.firstName + " " + user.lastName)}
+          onPress={() => console.log(user.firstName + "" + user.lastName)}
         />
       </View>
     </SafeAreaView>
