@@ -14,12 +14,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#309773',
         flexDirection: 'column',
-        alignContent: 'space-between'
-    },
-    Title: {
-        marginLeft: '5%',
-        justifyContent: 'flex-end',
-        flexDirection: 'column',
+        justifyContent: 'flex-end'
     },
     Title: {
         paddingLeft: '5%',
@@ -29,7 +24,7 @@ const style = StyleSheet.create({
     formViewStyles: {
         backgroundColor: 'white',
         width: wp('100%'),
-        height: hp('70%'),
+        height: hp('30%'),
         borderTopRightRadius: 55,
         borderTopLeftRadius: 55,
         position: 'absolute',
@@ -39,15 +34,6 @@ const style = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
      },
-     ForgoutPasswordInput: {
-         marginTop: 25
-     },
-     formLottieView: {
-         flexDirection: 'column',
-         alignItems: 'center',
-         marginBottom: 0
-        marginTop: '150%',
-    },
     ForgoutPasswordForm: {
         textAlign: 'center',
         alignItems: 'center'
@@ -57,7 +43,7 @@ const style = StyleSheet.create({
      },
      LottieStyle: {
          flex: 1,
-         marginTop: '60%',
+         marginTop: '100%',
          zIndex: -9
      }
 });
@@ -87,15 +73,8 @@ export default function ForgoutPassword({ navigation }) {
             [
                 {
                     text: "Close",
-                    style: "cancel"
-            'Email Sent',
-            'You will receive a Email for to restart your password',
-            [
-                {
-                    text: 'Close',
-                    onPress: () => {},
-                    style: 'cancel',
-                },
+                    style: "cancel",
+                }
             ],
             { cancelable: false }
         );
@@ -113,52 +92,47 @@ export default function ForgoutPassword({ navigation }) {
                         />
                         <Text style={style.Title}>Forgout Password</Text>
                     </View>
-                    <View style={style.formLottieView}>
-                    <View style={style.LottieStyle}>
-                        <Lottie
-                            source={Animation}
-                            autoPlay
-                            loop
-                            autoSize
-                            style={{
-                                height: hp('53.5%'),
-                                width: wp('53.5%'),
-                                marginLeft: 10,
-                                marginTop: '15%'
-                            }}
-                        />
-                        <View style={style.ForgoutPasswordForm}>
-                            <Input
-                                placeholder="Email"
-                                name="email"
-                                style={style.ForgoutPasswordInput}
-                                inputContainerStyle={{width: '75%', marginLeft: '15%'}}
-                                onChangeText={updateEmailState}
-                            />
-                            <Button
-                                title="Send"
-                                buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
-                                height: 400,
-                                width: 400,
-                                marginLeft: 5,
-                                marginTop: -175,
-                            }}
-                        />
-                    </View>
-                    <View style={style.formViewStyles}>
-                        <View style={style.ForgoutPasswordForm}>
-                            <Input
-                                placeholder="Email"
-                                style={style.ForgoutPasswordInput}
-                                inputContainerStyle={{width: '75%', marginLeft: '15%'}}
-                            />
-                            <Button
-                                title="Send"
-                                buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25}}
-                                onPress={showDialogBoxWithOneButton}
-                            />
-                        </View>
-                    </View>
+                        <View style={style.LottieStyle}>
+                                <Lottie
+                                    source={Animation}
+                                    autoPlay
+                                    loop
+                                    autoSize
+                                    style={{
+                                        height: 400,
+                                        width: 400,
+                                        marginLeft: 5,
+                                        marginTop: -175,
+                                    }}
+                                />
+                            </View>
+                            <View style={style.ForgoutPasswordForm}>
+                                <Input
+                                    placeholder="Email"
+                                    name="email"
+                                    style={style.ForgoutPasswordInput}
+                                    inputContainerStyle={{width: '75%', marginLeft: '15%'}}
+                                    onChangeText={updateEmailState}
+                                />
+                                <Button
+                                    title="Send"
+                                    buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
+                                />
+                            </View>
+                        <View style={style.formViewStyles}>
+                            <View style={style.ForgoutPasswordForm}>
+                                <Input
+                                    placeholder="Email"
+                                    style={style.ForgoutPasswordInput}
+                                    inputContainerStyle={{width: '75%', marginLeft: '15%'}}
+                                />
+                                <Button
+                                    title="Send"
+                                    buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25}}
+                                    onPress={showDialogBoxWithOneButton}
+                                />
+                            </View>
+                </View>
             </SafeAreaView>
         </>
     );

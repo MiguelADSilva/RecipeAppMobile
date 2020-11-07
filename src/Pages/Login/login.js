@@ -78,8 +78,7 @@ export default function LoginPage({ navigation }) {
     }
 
     return (
-        <>
-            <SafeAreaView style={styles.SafeAreaViewStyle}>
+        <SafeAreaView style={styles.SafeAreaViewStyle}>
                 <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
                 <Text style={styles.brandTitle}>RecipeApp</Text>
                 <View style={styles.LottieStyles}>
@@ -131,10 +130,6 @@ export default function LoginPage({ navigation }) {
                         onPress={navigateToHomePage}
                     />
                     <View style={styles.links}>
-                    <Text
-                        style={{ fontWeight: 'bold', marginLeft: '17%', marginTop: 30}}
-                    >
-                        If you forgout your password <Text/>
                         <Text
                             style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 30}}
                         >
@@ -149,26 +144,17 @@ export default function LoginPage({ navigation }) {
                         <Text
                             style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 10}}
                         >
-                            If you don't have account <Text />
+                            If you don't have account 
+                        <Text />
                             <Text
                                 style={{color: 'red'}}
+                                onPress={navigationToSignUp}
                             > 
                                 Click here!
                             </Text>
                     </Text>
-                    <Text
-                        style={{ fontWeight: 'bold', marginLeft: '20%', marginTop: 10}}
-                    >
-                        If you don't have account <Text />
-                        <Text
-                            style={{color: 'red'}}
-                            onPress={navigationToSignUp}
-                        > 
-                            Click here!
-                        </Text>
                     </View>
                 </View>
-            </SafeAreaView>
-        </>
+        </SafeAreaView>
     );
 }
