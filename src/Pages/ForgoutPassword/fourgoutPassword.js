@@ -11,7 +11,7 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#309773',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     Title: {
         marginLeft: '3%',
@@ -30,32 +30,32 @@ const style = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
-        marginTop: '150%'
+        marginTop: '150%',
      },
      ForgoutPasswordInput: {
-         marginTop: 25
-     }
+         marginTop: 25,
+     },
 });
 
 export default function ForgoutPassword({ navigation }) {
 
     function navigateToLoginPage() {
         navigation.navigate('Login');
-    };
+    }
 
     const showDialogBoxWithOneButton = () => {
         Alert.alert(
-            "Email Sent",
-            "You will receive a Email for to restart your password",
+            'Email Sent',
+            'You will receive a Email for to restart your password',
             [
                 {
-                    text: "Close",
-                    onPress: () => console.log("Close Pressed!"),
-                    style: "cancel"
+                    text: 'Close',
+                    onPress: () => console.log('Close Pressed!'),
+                    style: 'cancel',
                 },
             ],
             { cancelable: false }
-        )
+        );
     };
 
     return (
@@ -63,9 +63,9 @@ export default function ForgoutPassword({ navigation }) {
             <SafeAreaView style={style.Screen}>
                     <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
                     <View style={{ flexDirection: 'row'}}>
-                        <Button 
+                        <Button
                             title= "Back"
-                            buttonStyle={{ width: 70, height: 30}} 
+                            buttonStyle={{ width: 70, height: 30}}
                             onPress={navigateToLoginPage}
                         />
                         <Text style={style.Title}>Forgout Password</Text>
@@ -80,7 +80,7 @@ export default function ForgoutPassword({ navigation }) {
                                 height: 400,
                                 width: 400,
                                 marginLeft: 10,
-                                marginTop: 55
+                                marginTop: 55,
                             }}
                         />
                     </View>
@@ -98,5 +98,5 @@ export default function ForgoutPassword({ navigation }) {
                     </View>
             </SafeAreaView>
         </>
-    )
-};
+    );
+}
