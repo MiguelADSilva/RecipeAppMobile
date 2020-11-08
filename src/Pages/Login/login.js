@@ -144,7 +144,7 @@ export default function LoginPage({ navigation }) {
                         <Text
                             style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 10}}
                         >
-                            If you don't have account 
+                            If you don't have account <Text />
                         <Text />
                             <Text
                                 style={{color: 'red'}}

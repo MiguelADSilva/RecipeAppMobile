@@ -8,31 +8,6 @@ import Success from '../../Assets/Animations/success.json';
 import Loading from '../../Assets/Animations/loading.json';
 import Wrong from '../../Assets/Animations/wrong.json';
 
-chooseFile = () => {
-  const option = {
-    title: 'Select photo',
-    storageOption: {
-      skipBackup: true,
-      path: 'images'
-    }
-  };
-  
-  ImagePicker.showImagePicker(option, response => {
-    console.log(response);
-    if(response.didCancel) {
-      console.log('User cancelled Image Picker');
-    } else if(response.error) {
-      console.log('ImagePicker Error', response.error);
-    }else {
-      let source = { uri: response.uri };
-      setState({
-        ...user,
-        photo: source
-      });
-    }
-  })
-}
-
 const style = StyleSheet.create({
   Screen: {
     flex: 1,
@@ -94,7 +69,32 @@ export default function Signup({ navigation }) {
      ...user,
      lastName: e
    })
- }
+ };
+
+ chooseFile = () => {
+  const option = {
+    title: 'Select photo',
+    storageOption: {
+      skipBackup: true,
+      path: 'images'
+    }
+  };
+  
+  ImagePicker.showImagePicker(option, response => {
+    console.log(response);
+    if(response.didCancel) {
+      console.log('User cancelled Image Picker');
+    } else if(response.error) {
+      console.log('ImagePicker Error', response.error);
+    } else {
+      let source = { uri: response.uri };
+      setUser({
+        ...user,
+        photo: source
+      });
+    }
+  })
+}
 
  return (
    <>
@@ -150,14 +150,14 @@ export default function Signup({ navigation }) {
           }
         />
         <Button
-          title="Choose Foto"
+          title={user.photo ? 'Photo loaded' : 'Choose Photo'}
           buttonStyle={{ width: '50%', marginTop: 10, borderRadius: 25, alignSelf: 'center'}}
           onPress={chooseFile}
         />
         <Button
           title="Send"
           buttonStyle={{ width: 100, marginTop: 10, borderRadius: 25, alignSelf: 'center'}}
-          onPress={() => console.log(user.firstName + "" + user.lastName)}
+          onPress={() => console.log(user.firstName + "" + user.lastName + "" + user.photo)}
         />
       </View>
     </SafeAreaView>
