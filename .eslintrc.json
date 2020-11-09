@@ -6,7 +6,11 @@
       "commonjs": true,
       "es2021": true
   },
-  "plugins": ["react", "jsx-a11y", "import"],
+  "plugins": [
+    "react", 
+    "jsx-a11y", 
+    "import"
+  ],
   "extends": "standard",
   "rules": {
     "react/jsx-filename-extension": [

@@ -1,11 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Text, StatusBar } from 'react-native';
 import Animation from '../../Assets/Animations/lf30_editor_qy1svwml.json';
 import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
+import {API_URL} from "@env";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
@@ -77,6 +79,87 @@ export default function LoginPage({ navigation }) {
         navigation.navigate('Signup');
     }
 
+    const [errorRequest, setError] = useState({
+        haveErrorRequest: false,
+        errorMessage: ''
+    });
+
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    });
+
+    const updateEmailUser = e => {
+        setUser({
+            ...user,
+            email: e
+        })
+    };
+
+    const updatePasswordUser = e => {
+        setUser({
+            ...user,
+            password: e
+        })
+    };
+
+
+    const sentUser = () => {
+        fetch(API_URL + 'user/signin', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'email': user.email,
+                'password': user.password
+            })
+        })
+        .then(res => res.json())
+        .then(async (resp) => {
+            if(resp.message === 'Auth successful') { 
+                await AsyncStorage.setItem('token', resp.token);
+                console.log(resp.message);
+                navigateToHomePage();
+            } else {
+                return setError({ ...errorRequest, haveErrorRequest: true, errorMessage: resp.message });
+            }
+        }).catch(e => console.log(e));
+    };
+
+/*      const sentUser = () => {
+        fetch('https://recipe-app265.herokuapp.com/user/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'email': user.email,
+                'password': user.password
+            })
+        })
+        .then(resp => {
+            AsyncStorage.setItem('token', resp.token);
+            navigateToHomePage();
+        }).catch(error => {
+            setError({
+                ...errorRequest,
+                haveErrorRequest: true,
+                errorMessage: 'Falha ao fazer login'
+            })
+        })
+        .then(res=>res.json())
+        .then(async (data) => {
+            try{
+                await AsyncStorage.setItem('token', data.token);
+                navigateToHomePage();
+            } catch (e) {
+                console.log(e);
+            }
+        });
+    } */
+
     return (
         <SafeAreaView style={styles.SafeAreaViewStyle}>
                 <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#309773" translucent = {false} />
@@ -108,6 +191,7 @@ export default function LoginPage({ navigation }) {
                                 color="black"
                                 />
                             }
+                            onChangeText={updateEmailUser}
                         />
                         <Input
                             placeholder="Password"
@@ -122,18 +206,20 @@ export default function LoginPage({ navigation }) {
                                 color="black"
                                 />
                             }
+                            onChangeText={updatePasswordUser}
                         />
                     </View>
+                        <Text>{errorRequest.haveErrorRequest ? errorRequest.errorMessage : ''}</Text>
                     <Button
                         title="Login"
                         buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
-                        onPress={navigateToHomePage}
+                        onPress={() => sentUser()}
                     />
                     <View style={styles.links}>
                         <Text
                             style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 30}}
                         >
-                            If you forgout your password <Text/>
+                            If you forgot your password <Text/>
                             <Text
                                 style={{color: 'red'}}
                                 onPress={navigateToForgoutPassword}
