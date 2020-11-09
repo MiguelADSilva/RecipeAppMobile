@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
- 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import LoginPage from '../Pages/Login/login';
 import HomePage from '../Pages/Home/home';
 import ForgoutPassword from '../Pages/ForgoutPassword/fourgoutPassword';
@@ -11,6 +12,21 @@ import Signup from '../Pages/signup/signup';
 const Stack = createStackNavigator();
 
 function Routes() {
+    const [isLoggedIn, setLoggedIn] = useState(null);
+
+    const detectLogin = async () => {
+        const token = await AsyncStorage.getItem('token');
+        if(token) {
+            setLoggedIn(true);
+        }else{
+            setLoggedIn(false);
+        };
+
+        useEffect(() => {
+            detectLogin();
+        },[]);
+    };
+
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Login" component={LoginPage} />
