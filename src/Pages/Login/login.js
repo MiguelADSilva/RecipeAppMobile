@@ -7,6 +7,7 @@ import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
+import {API_URL} from "@env";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
@@ -78,6 +79,11 @@ export default function LoginPage({ navigation }) {
         navigation.navigate('Signup');
     }
 
+    const [errorRequest, setError] = useState({
+        haveErrorRequest: false,
+        errorMessage: ''
+    });
+
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -98,8 +104,32 @@ export default function LoginPage({ navigation }) {
     };
 
 
-    const sentUser = async () => {
-        fetch('localhost:3000/', {
+    const sentUser = () => {
+        fetch(API_URL + 'user/signin', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'email': user.email,
+                'password': user.password
+            })
+        })
+        .then(res => res.json())
+        .then(async (resp) => {
+            if(resp.message === 'Auth successful') { 
+                await AsyncStorage.setItem('token', resp.token);
+                console.log(resp.message);
+                navigateToHomePage();
+            } else {
+                return setError({ ...errorRequest, haveErrorRequest: true, errorMessage: resp.message });
+            }
+        }).catch(e => console.log(e));
+    };
+
+/*      const sentUser = () => {
+        fetch('https://recipe-app265.herokuapp.com/user/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,16 +139,26 @@ export default function LoginPage({ navigation }) {
                 'password': user.password
             })
         })
+        .then(resp => {
+            AsyncStorage.setItem('token', resp.token);
+            navigateToHomePage();
+        }).catch(error => {
+            setError({
+                ...errorRequest,
+                haveErrorRequest: true,
+                errorMessage: 'Falha ao fazer login'
+            })
+        })
+        .then(res=>res.json())
         .then(async (data) => {
             try{
-                await AsyncStorage.setItem('token', data.token)
-                navigateToHomePage()
+                await AsyncStorage.setItem('token', data.token);
+                navigateToHomePage();
             } catch (e) {
-                console.log('Error to try login', e)
-                Alert(e);
+                console.log(e);
             }
-        })
-    };
+        });
+    } */
 
     return (
         <SafeAreaView style={styles.SafeAreaViewStyle}>
@@ -169,6 +209,7 @@ export default function LoginPage({ navigation }) {
                             onChangeText={updatePasswordUser}
                         />
                     </View>
+                        <Text>{errorRequest.haveErrorRequest ? errorRequest.errorMessage : ''}</Text>
                     <Button
                         title="Login"
                         buttonStyle={{ width: 100, marginLeft: '37%', marginTop: 10, borderRadius: 25}}
