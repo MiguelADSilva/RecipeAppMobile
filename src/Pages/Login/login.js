@@ -219,7 +219,7 @@ export default function LoginPage({ navigation }) {
                         <Text
                             style={{ fontWeight: 'bold', marginLeft: '15%', marginTop: 30}}
                         >
-                            If you forgout your password <Text/>
+                            If you forgot your password <Text/>
                             <Text
                                 style={{color: 'red'}}
                                 onPress={navigateToForgoutPassword}
