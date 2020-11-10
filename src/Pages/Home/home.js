@@ -15,6 +15,13 @@ export default function HomePage({ navigation }) {
     };
 
     const [email, setEmail] = useState("loading");
+    const [recipe, setRecipe] =useState([{
+      recipeName: '',
+      recipeSteps: '',
+      imageUrl: '',
+      _id: '',
+      _createdAt: ''
+    }]);
 
     const Boiler = async ()=>{
       const token = await AsyncStorage.getItem("token");
@@ -23,7 +30,19 @@ export default function HomePage({ navigation }) {
           Authorization:"Bearer "+token
         })
       })
-      .then(res=>res.json())
+      .then(res => res.json())
+      .then(data => {
+        data.recipes.map(recipe =>  {
+        //  console.log("id " + recipe._id);
+          setRecipe({
+            recipeName: recipe.recipeName,
+            recipeSteps: recipe.recipeSteps,
+            imageURL: recipe.imageURL,
+            _id: recipe._id,
+            _createdAt: recipe._createdAt
+          });
+        })
+      });
    };
 
    useEffect(()=>{
