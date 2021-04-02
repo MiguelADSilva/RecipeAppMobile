@@ -7,7 +7,6 @@ import Lottie from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
-import {API_URL} from "@env";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
@@ -105,7 +104,7 @@ export default function LoginPage({ navigation }) {
 
 
     const sentUser = () => {
-        fetch(API_URL + 'user/signin', {
+        fetch('https://recipe-app265.herokuapp.com/user/signin', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
