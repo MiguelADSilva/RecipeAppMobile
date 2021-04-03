@@ -64,12 +64,11 @@ export default function HomePage({navigation}) {
         placement="left"
         leftComponent={{icon: 'menu', color: '#fff'}}
         centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
-        rightComponent={{icon: 'home', color: '#fff'}}
-      />
-      <Button
-        title="Logout"
-        buttonStyle={{width: 200, height: 30, marginLeft: 25, marginTop: 25}}
-        onPress={logout}
+        rightComponent={{
+          icon: 'home',
+          color: '#fff',
+          onPress: logout,
+        }}
       />
       <ScrollView style={{height}}>
         <ScrollView horizontal>
