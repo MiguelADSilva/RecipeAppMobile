@@ -2,7 +2,7 @@
 import 'react-native-gesture-handler';
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, Dimensions, ScrollView} from 'react-native';
-import {Button, Card, ListItem, Icon} from 'react-native-elements';
+import {Button, Card, ListItem, Icon, Header} from 'react-native-elements';
 import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -60,7 +60,12 @@ export default function HomePage({navigation}) {
   const height = (width * 100) / 51;
   return (
     <View>
-      <Text>HomePage</Text>
+      <Header
+        placement="left"
+        leftComponent={{icon: 'menu', color: '#fff'}}
+        centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
+        rightComponent={{icon: 'home', color: '#fff'}}
+      />
       <Button
         title="Logout"
         buttonStyle={{width: 200, height: 30, marginLeft: 25, marginTop: 25}}
