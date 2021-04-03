@@ -13,6 +13,10 @@ export default function HomePage({navigation}) {
     navigation.navigate('Login');
   }
 
+  function navigateToMenuPage() {
+    navigation.navigate('Menu');
+  }
+
   const [email, setEmail] = useState('loading');
   const [recipe, setRecipe] = useState([
     {
@@ -62,7 +66,11 @@ export default function HomePage({navigation}) {
     <View>
       <Header
         placement="left"
-        leftComponent={{icon: 'menu', color: '#fff'}}
+        leftComponent={{
+          icon: 'menu',
+          color: '#fff',
+          onPress: navigateToMenuPage,
+        }}
         centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
         rightComponent={{
           icon: 'home',
