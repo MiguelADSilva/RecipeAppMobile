@@ -57,7 +57,7 @@ export default function HomePage({navigation}) {
   };
 
   const {width} = Dimensions.get('window');
-  const height = (width * 100) / 51;
+  const height = (width * 100) / 50;
   return (
     <View>
       <Header
@@ -73,7 +73,7 @@ export default function HomePage({navigation}) {
       <ScrollView style={{height}}>
         <ScrollView horizontal>
           {Array.from({length: 3}).map((_, index) => (
-            <Card key={index} containerStyle={{width: 330}}>
+            <Card key={index} containerStyle={{width: 330, marginLeft: 30}}>
               <Card.Title>HELLO WORLD</Card.Title>
               <Card.Image>
                 <Image
@@ -100,7 +100,7 @@ export default function HomePage({navigation}) {
         </ScrollView>
         <ScrollView horizontal>
           {Array.from({length: 3}).map((_, index) => (
-            <Card key={index} containerStyle={{width: 330}}>
+            <Card key={index} containerStyle={{width: 330, marginLeft: 30}}>
               <Card.Title>HELLO WORLD</Card.Title>
               <Card.Image>
                 <Image
@@ -127,7 +127,7 @@ export default function HomePage({navigation}) {
         </ScrollView>
         <ScrollView horizontal>
           {Array.from({length: 3}).map((_, index) => (
-            <Card key={index} containerStyle={{width: 330}}>
+            <Card key={index} containerStyle={{width: 330, marginLeft: 30}}>
               <Card.Title>HELLO WORLD</Card.Title>
               <Card.Image>
                 <Image
@@ -154,7 +154,7 @@ export default function HomePage({navigation}) {
         </ScrollView>
         <ScrollView horizontal>
           {Array.from({length: 3}).map((_, index) => (
-            <Card key={index} containerStyle={{width: 330}}>
+            <Card key={index} containerStyle={{width: 330, marginLeft: 30}}>
               <Card.Title>HELLO WORLD</Card.Title>
               <Card.Image>
                 <Image
