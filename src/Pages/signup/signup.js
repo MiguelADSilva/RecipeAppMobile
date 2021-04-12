@@ -52,6 +52,11 @@ export default function Signup({navigation}) {
     photo: '',
   });
 
+  const [errorRequest, setError] = useState({
+    haveErrorRequest: false,
+    errorMessage: '',
+  });
+
   const [loading, setLoading] = useState({
     isLoading: true,
     areFailed: false,
@@ -68,6 +73,20 @@ export default function Signup({navigation}) {
     setUser({
       ...user,
       lastName: e,
+    });
+  };
+
+  const updateEmail = (e) => {
+    setUser({
+      ...user,
+      email: e,
+    });
+  };
+
+  const updatePassword = (e) => {
+    setUser({
+      ...user,
+      password: e,
     });
   };
 
@@ -94,6 +113,37 @@ export default function Signup({navigation}) {
         });
       }
     });
+  };
+
+  const regUser = () => {
+    fetch('https://recipe-app265.herokuapp.com/user/signup', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        photo: user.photo,
+      }),
+    })
+      .then((res) => res.json())
+      .then((resp) => {
+        if (resp.message === 'User created') {
+          console.log(resp.message);
+          navigateToLoginPage();
+        } else {
+          return setError({
+            ...errorRequest,
+            haveErrorRequest: true,
+            errorMessage: resp.message,
+          });
+        }
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -142,6 +192,7 @@ export default function Signup({navigation}) {
             style={style.SignupInput}
             inputContainerStyle={{width: '75%', marginLeft: '15%'}}
             leftIcon={<Icon name="envelope" size={24} color="black" />}
+            onChangeText={updateEmail}
           />
           <Input
             placeholder="Password"
@@ -149,6 +200,7 @@ export default function Signup({navigation}) {
             inputContainerStyle={{width: '75%', marginLeft: '15%'}}
             secureTextEntry={true}
             leftIcon={<Icon name="lock" size={24} color="black" />}
+            onChangeText={updatePassword}
           />
           <Button
             title={user.photo ? 'Photo loaded' : 'Choose Photo'}
@@ -168,9 +220,7 @@ export default function Signup({navigation}) {
               borderRadius: 25,
               alignSelf: 'center',
             }}
-            onPress={() =>
-              console.log(user.firstName + '' + user.lastName + '' + user.photo)
-            }
+            onPress={() => regUser()}
           />
         </View>
       </SafeAreaView>
